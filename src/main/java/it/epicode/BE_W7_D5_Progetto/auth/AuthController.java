@@ -36,7 +36,7 @@ public class AuthController {
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
         log.info("Login request:");
         String token = appUserService.authenticateUser(
-                loginRequest.getEmail(),
+                loginRequest.getUsername(),
                 loginRequest.getPassword()
         );
         return ResponseEntity.ok(new AuthResponse(token));

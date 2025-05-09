@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class BeW7D5ProgettoApplication {
+public class GestioneEventi {
 
 	public static void main(String[] args) {
-		SpringApplication.run(BeW7D5ProgettoApplication.class, args);
+		SpringApplication.run(GestioneEventi.class, args);
 	}
 
 }
