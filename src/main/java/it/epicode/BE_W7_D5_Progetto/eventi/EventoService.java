@@ -29,7 +29,7 @@ public class EventoService {
 
     public void deleteEvento(Long id, AppUser utenteLoggato) {
         Evento evento = eventoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Evento non trovato"));
-        if (!evento.getOrganizzatore().getId().equals(utenteLoggato.getId()) || !evento.getOrganizzatore().getRoles().contains(Role.ROLE_ADMIN)) {
+        if (!evento.getOrganizzatore().getId().equals(utenteLoggato.getId()) && !utenteLoggato.getRoles().contains(Role.ROLE_ADMIN)) {
             throw new RuntimeException("Non puoi eliminare questo evento perchè non ne sei nè l'organizzatore, nè l'admin di sistema.");
         }
         eventoRepository.delete(evento);
@@ -44,10 +44,11 @@ public class EventoService {
 
     public EventoResponse updateEvento (Long id, EventoRequest request, AppUser utenteLoggato) {
         Evento evento = eventoRepository.findById(id).orElseThrow(() -> new EntityNotFoundException("Evento non trovato"));
-        if (!evento.getOrganizzatore().getId().equals(utenteLoggato.getId()) || !evento.getOrganizzatore().getRoles().contains(Role.ROLE_ADMIN)) {
+        if (!evento.getOrganizzatore().getId().equals(utenteLoggato.getId()) && !utenteLoggato.getRoles().contains(Role.ROLE_ADMIN)) {
             throw new RuntimeException("Non puoi modificare questo evento perchè non ne sei nè l'organizzatore, nè l'admin di sistema.");
         }
         BeanUtils.copyProperties(request, evento);
+        evento.setOrganizzatore(utenteLoggato);
         eventoRepository.save(evento);
         return fromEntity(evento);
     }

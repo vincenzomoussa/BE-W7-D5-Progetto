@@ -1,6 +1,5 @@
 package it.epicode.BE_W7_D5_Progetto.eventi;
 
-import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
